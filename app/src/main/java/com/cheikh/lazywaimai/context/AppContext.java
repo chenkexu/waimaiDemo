@@ -2,7 +2,9 @@ package com.cheikh.lazywaimai.context;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.cheikh.lazywaimai.controller.MainController;
+import com.cheikh.lazywaimai.manager.LbsManager;
 import com.cheikh.lazywaimai.module.ApplicationModule;
 import com.cheikh.lazywaimai.module.library.ContextProvider;
 import com.cheikh.lazywaimai.module.library.InjectorModule;
@@ -21,6 +23,7 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import cn.sharesdk.framework.ShareSDK;
 import dagger.ObjectGraph;
 
 public class AppContext extends Application implements Injector {
@@ -77,6 +80,16 @@ public class AppContext extends Application implements Injector {
                 new InjectorModule(this)
         );
         mObjectGraph.inject(this);
+        // 百度地图在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
+        SDKInitializer.initialize(this);
+        // 初始化百度定位服务
+        LbsManager.getInstance().init(this);
+        //数据库初始化
+//        LitePal.initialize(this);
+        //初始化ShareSDK
+        ShareSDK.initSDK(this);
+
+
     }
 
     @Override

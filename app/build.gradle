@@ -45,6 +45,18 @@ android {
         exclude 'libs/android-support-v4.jar'
         exclude 'AndroidManifest.xml'
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 bugly {

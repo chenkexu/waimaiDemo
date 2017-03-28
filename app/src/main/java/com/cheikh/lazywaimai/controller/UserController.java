@@ -5,6 +5,7 @@ import com.cheikh.lazywaimai.context.AppConfig;
 import com.cheikh.lazywaimai.context.AppCookie;
 import com.cheikh.lazywaimai.model.bean.Business;
 import com.cheikh.lazywaimai.model.bean.Favorite;
+import com.cheikh.lazywaimai.model.bean.LoginInfo;
 import com.cheikh.lazywaimai.model.bean.ResponseError;
 import com.cheikh.lazywaimai.model.bean.ResultsPage;
 import com.cheikh.lazywaimai.model.bean.Token;
@@ -480,6 +481,8 @@ public class UserController extends BaseController<UserController.UserUi, UserCo
 
         //注销
         void logout();
+
+        void qqlogin(LoginInfo loginInfo);
     }
 
     /**
@@ -629,6 +632,23 @@ public class UserController extends BaseController<UserController.UserUi, UserCo
             @Override
             public void logout() {
                 doLogout(getId(ui));
+            }
+
+
+            @Override
+            public void qqlogin(LoginInfo loginInfo) {
+                mRestApiClient.setToken(loginInfo.getToken())
+                        .accountService();
+                AppCookie.saveAccessToken(loginInfo.getToken());//保存AccessToken
+                AppCookie.saveRefreshToken(loginInfo.getToken());//保存RefreshToken
+                User user = new User();
+                user.setAvatarUrl(loginInfo.getUserAvaterUrl());
+                user.setNickname(loginInfo.getNickName());
+                user.setToken(loginInfo.getToken());
+                if (ui instanceof UserLoginUi) {
+                    ((UserLoginUi) ui).userLoginFinish();
+                   AppCookie.saveUserInfo(user);
+                }
             }
         };
     }

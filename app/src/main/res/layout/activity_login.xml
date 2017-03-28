@@ -155,4 +155,29 @@
             android:textSize="16.0sp" />
     </LinearLayout>
 
+
+
+    <LinearLayout
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/iv_weixin_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/login_weixin"/>
+
+        <ImageView
+            android:layout_marginLeft="50dp"
+            android:id="@+id/iv_qq_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/login_qq"/>
+
+    </LinearLayout>
+
 </LinearLayout>

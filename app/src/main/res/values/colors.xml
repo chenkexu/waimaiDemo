@@ -31,4 +31,12 @@
     <color name="red">#F44336</color>
     <color name="orange">#FF9800</color>
 
+
+
+
+    <!--第三方登录和分享-->
+    <color name="page_back">#fff2f2f2</color>
+    <color name="logo_text_color">#ff7f7f7f</color>
+    <color name="login_with_other_plat_text_color">#ff383838</color>
+    <color name="dialog_white_bg">#fbfbfb</color>
 </resources>

@@ -216,5 +216,7 @@
 
 
     <string name="prb_default_symbolic_string">$</string>
+    <string name="please_install_wechat">请安装微信</string>
+    <string name="waiting">正在加载</string>
 
 </resources>
