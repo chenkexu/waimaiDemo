@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
+    <color name="primary">#00b4ae</color>
+    <color name="primary_dark">#00b4ae</color>
     <color name="primary_light">#C5CAE9</color>
     <color name="accent">#536DFE</color>
     <color name="primary_text">#424242</color>
@@ -39,4 +39,30 @@
     <color name="logo_text_color">#ff7f7f7f</color>
     <color name="login_with_other_plat_text_color">#ff383838</color>
     <color name="dialog_white_bg">#fbfbfb</color>
+
+    <!-- base Dialog-->
+    <color name="full_alpha">#00000000</color>
+
+    <!-- pile_info_map_pop -->
+    <color name="pile_info_map_pop_bottom_color">#F7F8F7</color>
+    <color name="pile_info_map_pop_splite_line_color">#E7E6E3</color>
+
+
+
+    <!--==============circleDemo动态==========-->
+    <color name="praise_item_default">#333333</color>
+    <color name="praise_item_selector_default">#cccccc</color>
+    <color name="praise_item">#8290AF</color>
+    <color name="default_clickable_color">#cccccc</color>
+    <color name="basic_color_primary">#373b3e</color>
+    <color name="color_8290AF">#8290AF</color>
+    <color name="color_232323">#232323</color>
+    <color name="color_aeaeae">#aeaeae</color>
+    <color name="im_social_dig_name_bg">#DDDDDD</color>
+    <color name="im_font_color_text_hint">#abb1b6</color>
+    <color name="im_line_color">#dadada</color>
+    <color name="name_selector_color">#cccccc</color>
+    <color name="bg_no_photo">#EEEEEE</color>
+    <color name="title_bg">#373B3E</color>
+    <color name="video_bg">#ededed</color>
 </resources>

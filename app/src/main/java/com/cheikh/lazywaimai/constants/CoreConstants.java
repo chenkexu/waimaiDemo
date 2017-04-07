@@ -1,4 +1,4 @@
-package com.cheikh.lazywaimai.util.constants;
+package com.cheikh.lazywaimai.constants;
 
 /**
  * Created by CaiBingZhang on 15/9/6.

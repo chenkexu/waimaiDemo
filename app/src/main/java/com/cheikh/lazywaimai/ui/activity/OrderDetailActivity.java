@@ -3,6 +3,7 @@ package com.cheikh.lazywaimai.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.cheikh.lazywaimai.base.BaseActivity;
 import com.cheikh.lazywaimai.base.BaseController;
 import com.cheikh.lazywaimai.context.AppContext;
 import com.cheikh.lazywaimai.controller.OrderController;
+import com.cheikh.lazywaimai.manager.ShareApiManager;
 import com.cheikh.lazywaimai.model.bean.Business;
 import com.cheikh.lazywaimai.model.bean.Order;
 import com.cheikh.lazywaimai.model.bean.ResponseError;
@@ -28,6 +30,8 @@ import com.cheikh.lazywaimai.widget.refresh.RefreshLayout;
 import java.util.Date;
 
 import butterknife.Bind;
+
+
 
 /**
  * author: cheikh.wang on 17/1/5
@@ -155,16 +159,29 @@ public class OrderDetailActivity extends BaseActivity<OrderController.OrderUiCal
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_share, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case android.R.id.home: {
                 Display display = getDisplay();
                 if (display != null) {
                     display.showMain(MainTab.ORDERS);
                 }
                 return true;
+            }
+            case R.id.menu_share:
+                ShareApiManager.oneKeyShareDownloadImage(this,"www.baidu.com",null);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

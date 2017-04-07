@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.util.ContentView;
 import com.cheikh.lazywaimai.widget.LoadingDialog;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * author: cheikh.wang on 16/11/23
@@ -60,9 +62,12 @@ public abstract class BaseFragment<UC> extends CoreFragment<UC> {
         if (mToolbar != null) {
             mToolbar.setTitle(getTitle());
             setSupportActionBar(mToolbar);
-            if (isShowBack()) {
+            if (isShowBack()) { //需要显示返回键
                 getSupportActionBar().setHomeButtonEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+            if (isshowIcon()){
+                mToolbar.inflateMenu(R.menu.menu_user_center);
             }
         }
     }
@@ -81,6 +86,10 @@ public abstract class BaseFragment<UC> extends CoreFragment<UC> {
 
     protected boolean isShowBack() {
         return true;
+    }
+
+    protected boolean isshowIcon(){
+        return false;
     }
 
     protected void setTitle(CharSequence title) {
@@ -123,4 +132,6 @@ public abstract class BaseFragment<UC> extends CoreFragment<UC> {
             mLoading.dismiss();
         }
     }
+
+
 }

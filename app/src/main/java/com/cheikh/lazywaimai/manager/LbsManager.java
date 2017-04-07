@@ -114,7 +114,7 @@ public class LbsManager {
 	};
 
 	/**
-	 * 根据城市地址 获取坐標
+	 * 根据城市地址 获取坐标
 	 */
 	public void getLocationByAddress(String city, String address, final OnGetGeoCoderResultListener onGetGeoCoderResultListener) {
 

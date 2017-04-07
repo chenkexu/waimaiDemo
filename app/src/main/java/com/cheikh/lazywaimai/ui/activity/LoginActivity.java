@@ -19,12 +19,12 @@ import com.cheikh.lazywaimai.model.bean.LoginInfo;
 import com.cheikh.lazywaimai.model.bean.ResponseError;
 import com.cheikh.lazywaimai.ui.Display;
 import com.cheikh.lazywaimai.util.ContentView;
-import com.cheikh.lazywaimai.util.L;
 import com.cheikh.lazywaimai.util.LoadingDialog;
 import com.cheikh.lazywaimai.util.StringUtil;
 import com.cheikh.lazywaimai.util.SystemUtil;
 import com.cheikh.lazywaimai.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.wxhl.core.utils.L;
 
 import butterknife.Bind;
 import butterknife.OnClick;

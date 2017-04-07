@@ -49,6 +49,24 @@ public class Constants {
     }
 
     public class Key {
+        public static final String MY_LONGITUDE = "my_longitude";//我的当前位置
+        public static final String MY_LATITUDE = "my_latitude";  //我的当前纬度
+        public static final String MY_CITY_ID = "my_cityId";
+        public static final String LONGITUDE = "longitude";
+        public static final String LATITUDE = "latitude";
+        public static final String CITY = "city";
+        public static final String ADDRESS = "address";
+        public static final String CITY_ID = "cityId";
+        public static final String APP_VERSION = "appVersion";
+        public static final String CITY_LOADED = "cityLoaded";
+        public static final String USER_ID = "user_id";
+        public static final String SAVE_TRAFFIC = "saveTraffic";
+        public static final String MESSAGE_PUSH = "messagePush";
+        public static final String TRANSACTION_PUSH = "transactionPush";
+        public static final String APP_VERSION_CODE = "version_code";
+
+
+
         public static final String SP_COOKIE_FILE = "cookie_file";
         public static final String SP_USER_INFO = "user_info";
         public static final String SP_LOGIN_STATE = "login_state";

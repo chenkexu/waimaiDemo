@@ -5,8 +5,8 @@ import android.util.Log;
 
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.model.bean.LoginInfo;
-import com.cheikh.lazywaimai.util.L;
 import com.cheikh.lazywaimai.util.ToastUtil;
+import com.wxhl.core.utils.L;
 
 import java.util.HashMap;
 import java.util.Map;

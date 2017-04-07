@@ -23,6 +23,7 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import cn.bmob.v3.Bmob;
 import cn.sharesdk.framework.ShareSDK;
 import dagger.ObjectGraph;
 
@@ -88,7 +89,8 @@ public class AppContext extends Application implements Injector {
 //        LitePal.initialize(this);
         //初始化ShareSDK
         ShareSDK.initSDK(this);
-
+        //Bmob初始化
+        Bmob.initialize(this,"037271e76e2d96a4950d5bd2457f034f");
 
     }
 

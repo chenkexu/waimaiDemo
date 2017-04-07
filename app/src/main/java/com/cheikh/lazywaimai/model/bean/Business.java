@@ -6,7 +6,7 @@ import java.util.List;
 
 
 //商家实体
-public class Business implements Serializable {
+public class Business  implements Serializable {
 
     @SerializedName("id")
     String id;

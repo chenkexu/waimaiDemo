@@ -20,7 +20,10 @@ public class SplashActivity extends BasePermissionActivity {
             public void run() {
                 requestPermission(new String[]{
                         Manifest.permission.READ_PHONE_STATE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
                 });
             }
         }, 2000);

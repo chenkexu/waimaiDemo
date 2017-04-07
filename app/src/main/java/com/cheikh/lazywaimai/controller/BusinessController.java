@@ -3,6 +3,7 @@ package com.cheikh.lazywaimai.controller;
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.base.BaseController;
 import com.cheikh.lazywaimai.context.AppCookie;
+import com.cheikh.lazywaimai.model.Seller;
 import com.cheikh.lazywaimai.model.ShoppingCart;
 import com.cheikh.lazywaimai.model.bean.Business;
 import com.cheikh.lazywaimai.model.bean.Favorite;
@@ -19,10 +20,16 @@ import com.google.common.base.Preconditions;
 import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BatchResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListListener;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Func1;
@@ -134,9 +141,9 @@ public class BusinessController extends BaseController<BusinessController.Busine
                         if (ui instanceof BusinessListUi) {
                             boolean haveNextPage = businesses != null && businesses.size() == PAGE_SIZE;
                             ((BusinessListUi) ui).onFinishRequest(businesses, page, haveNextPage);
-
                             Logger.e("所有的商家为：" +  businesses.toString());
                             Logger.e("商家数：" +  businesses.size());
+//                            addSqlite(businesses);
                         }
                     }
 
@@ -149,6 +156,65 @@ public class BusinessController extends BaseController<BusinessController.Busine
                     }
                 });
     }
+
+
+    /**
+     * 商家信息添加到数据库
+     */
+    private void addSqlite(List<Business> businesses){
+
+        List<BmobObject>  sellers = new ArrayList<>();
+        for (int i = 0; i < businesses.size(); i++) {
+            Business business = businesses.get(i);
+            Seller seller = new Seller();
+            seller.setId(business.getId());
+            seller.setPhone(business.getPhone());
+            seller.setAddress(business.getAddress());
+            seller.setName(business.getName());
+            seller.setPicUrl(business.getPicUrl());
+            seller.setLike(business.isLike());
+            seller.setMinPrice(business.getMinPrice());
+            seller.setMonthSales(business.getMonthSales());
+            seller.setProductCategories(business.getProductCategories());
+            seller.setShippingFee(business.getShippingFee());
+            seller.setShippingTime(business.getShippingTime());
+            sellers.add(seller);
+        }
+
+        new BmobBatch().insertBatch(sellers).doBatch(new QueryListListener<BatchResult>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                Logger.e("------onStart-----------------");
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                Logger.e("------onFinish-----------------");
+            }
+
+            @Override
+            public void done(List<BatchResult> list, BmobException e) {
+                if (e==null){
+                    for(int i=0;i<list.size();i++){
+                        BatchResult result = list.get(i);
+                        BmobException ex =result.getError();
+                        if(ex==null){
+                            Logger.e("第"+i+"个数据批量添加成功："+result.getCreatedAt()+","+result.getObjectId()+","+result.getUpdatedAt());
+                        }else{
+                            Logger.e("第"+i+"个数据批量添加失败："+ex.getMessage()+","+ex.getErrorCode());
+                        }
+                    }
+                }else{
+                    Logger.e("Bmob添加异常"+e.getMessage()+","+e.getErrorCode());
+                }
+            }
+        });
+    }
+
+
 
     /**
      * 获取指定商家下的所有商品分类
@@ -169,6 +235,7 @@ public class BusinessController extends BaseController<BusinessController.Busine
 
                             Logger.e("该商家所有的产品类别为：" +  businesses.toString());
                             Logger.e("该商家所有的类别数为：" +  businesses.size());
+
                         }
                     }
 

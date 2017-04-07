@@ -2,7 +2,7 @@
     <string name="app_name">懒人外卖</string>
 
     <!-- Activity或者Fragment的标题 -->
-    <string name="title_shop">我要点餐</string>
+    <string name="title_shop">客官,请您点餐</string>
     <string name="title_orders">历史订单</string>
     <string name="title_express">快递</string>
     <string name="title_food">商品</string>

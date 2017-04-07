@@ -217,7 +217,9 @@ public class ProperRatingBar extends LinearLayout {
      * @param rating new rating value
      */
     public void setRating(int rating) {
-        if (rating  > this.totalTicks) rating = totalTicks;
+        if (rating  > this.totalTicks) {
+            rating = totalTicks;
+        }
         this.rating = rating;
         lastSelectedTickIndex = rating - 1;
         redrawChildren();

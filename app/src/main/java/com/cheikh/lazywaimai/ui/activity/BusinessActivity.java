@@ -11,6 +11,7 @@ import com.cheikh.lazywaimai.base.BaseController;
 import com.cheikh.lazywaimai.base.BaseTabActivity;
 import com.cheikh.lazywaimai.context.AppContext;
 import com.cheikh.lazywaimai.controller.BusinessController;
+import com.cheikh.lazywaimai.model.Seller;
 import com.cheikh.lazywaimai.model.bean.Business;
 import com.cheikh.lazywaimai.model.bean.ResponseError;
 import com.cheikh.lazywaimai.ui.Display;
@@ -20,8 +21,16 @@ import com.cheikh.lazywaimai.ui.fragment.ProductFragment;
 import com.cheikh.lazywaimai.util.StringFetcher;
 import com.cheikh.lazywaimai.util.ToastUtil;
 import com.google.common.base.Preconditions;
+import com.orhanobut.logger.Logger;
+import com.wxhl.core.utils.T;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * author: cheikh.wang on 17/1/5
@@ -134,6 +143,53 @@ public class BusinessActivity extends BaseTabActivity<BusinessController.Busines
             case R.id.menu_like: //收藏喜欢
                 showLoading(R.string.label_being_something);
                 getCallbacks().favoriteBusiness(mBusiness, !mIsLike);
+                String id = mBusiness.getId();
+
+                Logger.e("id:----:"+id);
+
+                BmobQuery<Seller> query = new BmobQuery<Seller>();
+                query.addWhereEqualTo("id", id);  //条件查询
+
+                query.findObjects(new FindListener<Seller>() {
+                    @Override
+                    public void done(List<Seller> list, BmobException e) {
+                        if (e==null){
+                            T.showShort(BusinessActivity.this,"查询成功");
+                            final Seller seller = list.get(0);
+                            seller.setLike(!mIsLike);
+                            seller.update(seller.getObjectId(), new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    if(e==null){
+                                        T.showShort(BusinessActivity.this,"更新成功:"+seller.getUpdatedAt());
+                                    }else{
+                                        Logger.e("异常信息为："+e.getMessage()+e.getErrorCode());
+                                        T.showShort(BusinessActivity.this,"更新失败:"+seller.getUpdatedAt());
+                                    }
+                                }
+                            });
+
+                        }else{
+                            T.showShort(BusinessActivity.this,"查询失败");
+                        }
+                    }
+                });
+
+
+
+//                final Seller seller = new Seller();
+//                seller.setLike(!mIsLike);
+//                seller.update(id, new UpdateListener() {
+//                    @Override
+//                    public void done(BmobException e) {
+//                        if(e==null){
+//                            T.showShort(BusinessActivity.this,"更新成功:"+seller.getUpdatedAt());
+//                        }else{
+//                            Logger.e("异常信息为："+e.getMessage()+e.getErrorCode());
+//                            T.showShort(BusinessActivity.this,"更新失败:"+seller.getUpdatedAt());
+//                        }
+//                    }
+//                });
                 return true;
         }
         return super.onOptionsItemSelected(item);

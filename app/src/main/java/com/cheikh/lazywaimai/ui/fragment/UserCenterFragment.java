@@ -1,5 +1,6 @@
 package com.cheikh.lazywaimai.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import com.cheikh.lazywaimai.widget.section.SectionTextItemView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import mvp.circledemo.activity.CircleActivity;
 
 //  “我的” 的Fragment
 @ContentView(R.layout.fragment_user_center)
@@ -113,7 +115,7 @@ public class UserCenterFragment extends BaseFragment<UserController.UserUiCallba
                 getCallbacks().showFavoriteList();
                 break;
             case R.id.btn_my_evaluates:
-                ToastUtil.showToast("还未开发");
+                startActivity(new Intent(getActivity(), CircleActivity.class));
                 break;
         }
     }
