@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
+
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.base.BaseController;
 import com.cheikh.lazywaimai.base.BaseFragment;
@@ -27,9 +28,12 @@ import com.cheikh.lazywaimai.widget.section.SectionTextItemView;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.CropOptions;
+import com.jph.takephoto.model.TResult;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -151,9 +155,9 @@ public class UserProfileFragment extends BaseFragment<UserController.UserUiCallb
                     public void onClick(DialogInterface dialog, int which) {
                         Uri originUri = getOriginUri();
                         if (originUri != null) {
-                            if (which == 0) {
+                            if (which == 0) {//相机获取图片并裁剪
                                 getTakePhoto().onPickFromCaptureWithCrop(originUri, getCropOptions());
-                            } else {
+                            } else { // 从相册中获取图片并裁剪
                                 getTakePhoto().onPickFromGalleryWithCrop(originUri, getCropOptions());
                             }
                         }
@@ -192,21 +196,22 @@ public class UserProfileFragment extends BaseFragment<UserController.UserUiCallb
     private TakePhoto getTakePhoto(){
         if (mTakePhoto == null){
             mTakePhoto = new TakePhotoImpl(this, new TakePhoto.TakeResultListener() {
-
                 @Override
-                public void takeSuccess(String imagePath) {
+                public void takeSuccess(TResult result) {
                     // 开始上传图片
+                    String imagePath = result.getImage().getOriginalPath();
                     showLoading(R.string.label_being_something);
                     getCallbacks().uploadAvatar(new File(imagePath));
                 }
 
                 @Override
-                public void takeFail(String msg) {
+                public void takeFail(TResult result, String msg) {
                     ToastUtil.showToast(msg);
                 }
 
                 @Override
                 public void takeCancel() {
+                    ToastUtil.showToast("已经取消选择");
                 }
             });
         }

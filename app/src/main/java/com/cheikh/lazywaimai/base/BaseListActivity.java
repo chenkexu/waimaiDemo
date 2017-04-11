@@ -150,7 +150,7 @@ public abstract class BaseListActivity<T, UC> extends BaseActivity<UC>
 
         if (items != null && !items.isEmpty()) {
             if (page == 1) {  //如果是第一页，直接设置上去
-                mAdapter.setItems(items);
+                mAdapter.setItems(items);  //数据设置上去
                 mMultiStateView.setState(MultiStateView.STATE_CONTENT);
             } else { //如果是第二页，就增加数据
                 mAdapter.addItems(items);

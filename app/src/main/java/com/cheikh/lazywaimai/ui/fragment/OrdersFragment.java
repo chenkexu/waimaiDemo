@@ -9,6 +9,8 @@ import com.cheikh.lazywaimai.model.bean.Order;
 import com.cheikh.lazywaimai.model.bean.ResponseError;
 import com.cheikh.lazywaimai.ui.adapter.OrderListAdapter;
 
+import java.util.List;
+
 import static com.cheikh.lazywaimai.util.Constants.ClickType.CLICK_TYPE_BUSINESS_CLICKED;
 import static com.cheikh.lazywaimai.util.Constants.ClickType.CLICK_TYPE_EVALUATE_CLICKED;
 import static com.cheikh.lazywaimai.util.Constants.ClickType.CLICK_TYPE_ORDER_AGAIN_CLICKED;
@@ -22,9 +24,17 @@ import static com.cheikh.lazywaimai.util.Constants.HttpCode.HTTP_UNAUTHORIZED;
 public class OrdersFragment extends BaseListFragment<Order, OrderController.OrderUiCallbacks>
         implements OrderController.OrderListUi {
 
+    private OrderListAdapter orderListAdapter = new OrderListAdapter();
+
     @Override
     protected BaseController getController() {
         return AppContext.getContext().getMainController().getOrderController();
+    }
+
+
+    @Override
+    public void onFinishRequest(List<Order> items, int page, boolean haveNextPage) {
+        super.onFinishRequest(items, page, haveNextPage);
     }
 
     @Override
@@ -44,7 +54,7 @@ public class OrdersFragment extends BaseListFragment<Order, OrderController.Orde
 
     @Override
     protected OrderListAdapter getAdapter() {
-        return new OrderListAdapter();
+        return orderListAdapter;
     }
 
     @Override
@@ -91,6 +101,7 @@ public class OrdersFragment extends BaseListFragment<Order, OrderController.Orde
         getCallbacks().refresh();
     }
 
+    //下一页
     @Override
     protected void nextPage() {
         getCallbacks().nextPage();
@@ -115,7 +126,7 @@ public class OrdersFragment extends BaseListFragment<Order, OrderController.Orde
                 getCallbacks().orderAgain(order);
                 break;
             case CLICK_TYPE_EVALUATE_CLICKED:
-                getCallbacks().showEvaluate();
+                getCallbacks().showEvaluate(order);
                 break;
         }
     }

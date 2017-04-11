@@ -12,12 +12,13 @@ import java.io.Serializable;
  */
 public class FavortItem implements Serializable{
 
+	private static final long serialVersionUID = -3188398718615988632L;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private String id;
 	private User user;//区分是哪个用户的点赞列表
+
 	public String getId() {
 		return id;
 	}

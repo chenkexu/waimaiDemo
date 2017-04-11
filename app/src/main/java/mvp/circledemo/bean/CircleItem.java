@@ -2,26 +2,29 @@ package mvp.circledemo.bean;
 
 import android.text.TextUtils;
 
+import com.cheikh.lazywaimai.model.bean.Order;
+
 import java.util.List;
+
+import cn.bmob.v3.BmobObject;
 
 
 /**
  * 一个说说的条目
  */
-public class CircleItem extends BaseBean{
+public class CircleItem extends BmobObject {
 
 	public final static String TYPE_URL = "1";
 	public final static String TYPE_IMG = "2";
 	public final static String TYPE_VIDEO = "3";
+	private static final long serialVersionUID = -597749934098222936L;
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-	private String id;
-	private String content;
-	private String createTime;
+	private String id;//id
+	private String content;//内容
+	private String createTime;//创建的时间
 	private String type;//1:链接  2:图片 3:视频
 	private String linkImg;
 	private String linkTitle;
@@ -31,11 +34,27 @@ public class CircleItem extends BaseBean{
 	private User user; //每个用户
 	private String videoUrl;
 	private String videoImgUrl;
-	private boolean isExpand;
+	private boolean isExpand;//是否展开
+	private Integer rating;//评分几颗星
+    private Order order;
 
 
 
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
 
 	public String getId() {
 		return id;

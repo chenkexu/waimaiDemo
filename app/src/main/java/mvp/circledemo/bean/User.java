@@ -1,4 +1,7 @@
 package mvp.circledemo.bean;
+
+import cn.bmob.v3.BmobObject;
+
 /**
  * 
 * @ClassName: User 
@@ -10,7 +13,8 @@ package mvp.circledemo.bean;
  *
  *
  */
-public class User {
+public class User extends BmobObject{
+	private static final long serialVersionUID = -8221381052998447033L;
 	private String id;
 	private String name;
 	private String headUrl;

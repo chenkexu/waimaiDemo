@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -14,6 +15,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.context.AppContext;
 import com.cheikh.lazywaimai.context.AppCookie;
+import com.cheikh.lazywaimai.model.bean.Order;
+import com.cheikh.lazywaimai.model.bean.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +68,10 @@ public class CircleAdapter extends BaseRecycleViewAdapter {
     }
 
     public CircleAdapter(Context context){
+
+        User userInfo = AppCookie.getUserInfo();
+
+        DatasUtil.setCurUser(userInfo);
         this.context = context;
     }
 
@@ -100,7 +107,6 @@ public class CircleAdapter extends BaseRecycleViewAdapter {
                 viewHolder = new ImageViewHolder(view);
             }
         }
-
         return viewHolder;
     }
 
@@ -112,6 +118,7 @@ public class CircleAdapter extends BaseRecycleViewAdapter {
             String avatarUrl = AppCookie.getUserInfo().getAvatarUrl();
             Glide.with(context).load(avatarUrl).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.color.bg_no_photo)
                     .into(holder.iconImageViewMe);
+            holder.cirCleName.setText(AppCookie.getUserInfo().getNickname());
         }else{
             final int circlePosition = position - HEADVIEW_SIZE;
             final CircleViewHolder holder = (CircleViewHolder) viewHolder;
@@ -125,11 +132,17 @@ public class CircleAdapter extends BaseRecycleViewAdapter {
             final List<CommentItem> commentsDatas = circleItem.getComments();
             boolean hasFavort = circleItem.hasFavort();
             boolean hasComment = circleItem.hasComment();
-
+            Order order = circleItem.getOrder();
+            if (order==null){
+                holder.tvOrderName.setText("四川麻辣烫(少年村路)");
+            }else{
+                holder.tvOrderName.setText(order.getBusinessInfo().getName());
+            }
             Glide.with(context).load(headImg).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.color.bg_no_photo)
                     .transform(new GlideCircleTransform(context)).into(holder.headIv);
 
             holder.nameTv.setText(name);
+            holder.ratingBar.setRating(circleItem.getRating());
             holder.timeTv.setText(createTime);
 
             if(!TextUtils.isEmpty(content)){
@@ -298,9 +311,13 @@ public class CircleAdapter extends BaseRecycleViewAdapter {
      */
     public class HeaderViewHolder extends RecyclerView.ViewHolder{
         private final ImageView iconImageViewMe;
+        private final TextView cirCleName;
+
+
         public HeaderViewHolder(View itemView) {
             super(itemView);
              iconImageViewMe =  (ImageView) itemView.findViewById(R.id.iv_icon_me);
+             cirCleName =  (TextView) itemView.findViewById(R.id.circleName);
         }
     }
 

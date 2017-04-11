@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
+
+import com.cheikh.lazywaimai.R;
+import com.cheikh.lazywaimai.ui.Display;
+import com.cheikh.lazywaimai.util.ActivityStack;
+import com.cheikh.lazywaimai.util.ContentView;
+import com.cheikh.lazywaimai.widget.LoadingDialog;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.cheikh.lazywaimai.R;
-import com.cheikh.lazywaimai.util.ContentView;
-import com.cheikh.lazywaimai.ui.Display;
-import com.cheikh.lazywaimai.widget.LoadingDialog;
 
 /**
  * author: cheikh.wang on 17/1/5
@@ -29,6 +32,7 @@ public abstract class BaseActivity<UC> extends CoreActivity<UC> {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ActivityStack.create().add(this);
         ButterKnife.bind(this);
         initializeToolbar();
         handleIntent(getIntent(), getDisplay());

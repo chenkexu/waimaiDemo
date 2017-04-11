@@ -1,6 +1,7 @@
 package com.cheikh.lazywaimai.context;
 
-import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.cheikh.lazywaimai.controller.MainController;
@@ -27,7 +28,7 @@ import cn.bmob.v3.Bmob;
 import cn.sharesdk.framework.ShareSDK;
 import dagger.ObjectGraph;
 
-public class AppContext extends Application implements Injector {
+public class AppContext extends android.support.multidex.MultiDexApplication implements Injector {
 
     private static AppContext mInstance;
 
@@ -98,4 +99,10 @@ public class AppContext extends Application implements Injector {
     public void inject(Object object) {
         mObjectGraph.inject(object);
     }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
 }

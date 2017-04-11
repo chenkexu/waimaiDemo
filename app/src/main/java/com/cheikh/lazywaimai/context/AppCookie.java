@@ -3,6 +3,11 @@ package com.cheikh.lazywaimai.context;
 import com.cheikh.lazywaimai.model.bean.User;
 import com.cheikh.lazywaimai.util.Constants;
 import com.cheikh.lazywaimai.util.PreferenceUtil;
+import com.wxhl.core.utils.FileLocalCache;
+
+import java.util.List;
+
+import mvp.circledemo.bean.CircleItem;
 
 /**
  * author：cheikh.wang on 16/8/3 19:50
@@ -13,6 +18,34 @@ public class AppCookie {
     public static boolean isLoggin() {
         return getUserInfo() != null && getAccessToken() != null;
     }
+    private static List<CircleItem> allCircleItems;
+
+
+    //保存评价圈子到文件
+    public static void savaCircleDatas(List<CircleItem> allCircleItems){
+        AppCookie.allCircleItems = allCircleItems;
+        FileLocalCache.setSerializableData(Constants.CACHE_DIR_SYSTEM,allCircleItems,Constants.CIRCLE_DATAS);
+    }
+
+    //从文件中获取评价圈的数据
+    public static List<CircleItem> getCircleItems(){
+        if(allCircleItems != null){
+            return allCircleItems;
+        }
+        allCircleItems = (List<CircleItem>) FileLocalCache.getSerializableData(Constants.CACHE_DIR_SYSTEM,Constants.CIRCLE_DATAS);
+        return allCircleItems;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 保存用户信息

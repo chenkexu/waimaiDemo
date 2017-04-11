@@ -2,6 +2,8 @@ package mvp.circledemo.bean;
 
 import java.io.Serializable;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * 
 * @ClassName: BaseBean 
@@ -10,7 +12,7 @@ import java.io.Serializable;
 * @date 2015-12-28 下午3:44:29 
 *
  */
-public class BaseBean implements Serializable{
+public class BaseBean extends BmobObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

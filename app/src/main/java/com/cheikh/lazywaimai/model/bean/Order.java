@@ -7,6 +7,7 @@ import java.io.Serializable;
 //某一笔订单
 public class Order implements Serializable {
 
+    private static final long serialVersionUID = 5347412088971763435L;
     @SerializedName("id")
     String id;
 

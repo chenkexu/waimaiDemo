@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.cheikh.lazywaimai.model.bean.Order;
 import com.cheikh.lazywaimai.ui.activity.FavoritesActivity;
 import com.cheikh.lazywaimai.ui.activity.FeedbackActivity;
+import com.cheikh.lazywaimai.ui.activity.GoEvaluateActivity;
 import com.cheikh.lazywaimai.ui.activity.RemarkActivity;
 import com.cheikh.lazywaimai.ui.fragment.SetNicknameFragment;
 import com.cheikh.lazywaimai.ui.fragment.SetUsernameFragment;
@@ -165,6 +166,13 @@ public class Display {
     public void showBusiness(Business business) {
         Intent intent = new Intent(mActivity, BusinessActivity.class);
         intent.putExtra(PARAM_OBJ, business);
+        mActivity.startActivity(intent);
+    }
+
+    //去评价
+    public void goEvaluate(Order order) {
+        Intent intent = new Intent(mActivity, GoEvaluateActivity.class);
+        intent.putExtra(PARAM_OBJ, order);
         mActivity.startActivity(intent);
     }
 

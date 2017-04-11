@@ -1,10 +1,14 @@
 package mvp.circledemo.utils;
 
 
+import com.cheikh.lazywaimai.util.DateUtil;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import cn.bmob.v3.BmobObject;
 import mvp.circledemo.bean.CircleItem;
 import mvp.circledemo.bean.CommentItem;
 import mvp.circledemo.bean.FavortItem;
@@ -26,7 +30,7 @@ public class DatasUtil {
 			"很赞，非常方便，下次还会再买",
 			"晚了一个一个小时。夜宵变早餐。配送员倒是没有什么，商家还撒谎说已经送出来了。这菜到手还是烫的，明明是刚做出来不就，不关配送员的事",
 			"挂羊头卖狗肉，大家千万不要买，比正规的店铺贵一杯，假货",
-			"非常好，非常喜欢，哈哈哈，么么"
+			"非常好，非常喜欢，哈哈哈，么么，很便宜，建议大家去买，五分！！！！"
 	  };
 	//每个评论用户的头像
 	public static final String[] HEADIMG = {
@@ -57,15 +61,28 @@ public class DatasUtil {
 	//当前的用户
 	public static final User curUser = new User("0", "自己", HEADIMG[0]);
 
+	public static User getCurUser() {
+		return curUser;
+	}
+
+	private static List<CircleItem> circleDatas;
+
+
+	public static void setCurUser(com.cheikh.lazywaimai.model.bean.User user) {
+	     curUser.setHeadUrl(user.getAvatarUrl());
+	     curUser.setId("0");
+	     curUser.setName(user.getNickname());
+	}
+
 	//所有的用户
 	static {
 		User user1 = new User("1", "亚瑟", HEADIMG[1]);
 		User user2 = new User("2", "鲁班七号", HEADIMG[2]);
 		User user3 = new User("3", "不知火舞", HEADIMG[3]);
-		User user4 = new User("4", "小乔", HEADIMG[4]);
+		User user4 = new User("4", "兰陵王", HEADIMG[4]);
 		User user5 = new User("5", "后裔", HEADIMG[5]);
-		User user6 = new User("6", "孙悟空", HEADIMG[6]);
-		User user7 = new User("7", "这个名字是不是很长，哈哈！但是有人却叫我改名字", HEADIMG[7]);
+		User user6 = new User("6", "宫本武藏", HEADIMG[6]);
+		User user7 = new User("7", "盲僧大大", HEADIMG[7]);
 
 		users.add(curUser);
 		users.add(user1);
@@ -76,39 +93,69 @@ public class DatasUtil {
 		users.add(user6);
 		users.add(user7);
 
+//		List<BmobObject> list = new ArrayList<>();
+//		for (int i = 0; i <users.size() ; i++) {
+//			list.add(users.get(i));
+//		}
+//		new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
+//
+//			@Override
+//			public void done(List<BatchResult> list, BmobException e) {
+//				if (e==null){
+//					for(int i=0;i<list.size();i++){
+//						BatchResult result = list.get(i);
+//						BmobException ex =result.getError();
+//						if(ex==null){
+//							Logger.e("第"+i+"个数据批量添加成功："+result.getCreatedAt()+","+result.getObjectId()+","+result.getUpdatedAt());
+//						}else{
+//							Logger.e("第"+i+"个数据批量添加失败："+ex.getMessage()+","+ex.getErrorCode());
+//						}
+//					}
+//				}else{
+//					Logger.e("Bmob添加异常"+e.getMessage()+","+e.getErrorCode());
+//				}
+//			}
+//		});
+
+
 		//发布的照片
 		PhotoInfo p1 = new PhotoInfo();
-		p1.url = "http://f.hiphotos.baidu.com/image/pic/item/faf2b2119313b07e97f760d908d7912396dd8c9c.jpg";
+//		p1.url = "http://f.hiphotos.baidu.com/image/pic/item/faf2b2119313b07e97f760d908d7912396dd8c9c.jpg";
+		p1.url = "http://i1.s1.dpfile.com/pc/f59ce7b879eea202f36692aa9ead9dac(249x249)/thumb.jpg";
 		p1.w = 640;
 		p1.h = 792;
 
 		PhotoInfo p2 = new PhotoInfo();
-		p2.url = "http://g.hiphotos.baidu.com/image/pic/item/4b90f603738da977c76ab6fab451f8198718e39e.jpg";
+//		p2.url = "http://g.hiphotos.baidu.com/image/pic/item/4b90f603738da977c76ab6fab451f8198718e39e.jpg";
+		p2.url = "http://p0.meituan.net/ugcpic/f59ce7b879eea202f36692aa9ead9dac%40249w_249h_1e_1l%7Cwatermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20";
 		p2.w = 640;
 		p2.h = 792;
 
 		PhotoInfo p3 = new PhotoInfo();
-		p3.url = "http://e.hiphotos.baidu.com/image/pic/item/902397dda144ad343de8b756d4a20cf430ad858f.jpg";
+//		p3.url = "http://e.hiphotos.baidu.com/image/pic/item/902397dda144ad343de8b756d4a20cf430ad858f.jpg";
+		p3.url = "http://i3.dpfile.com/2008-10-05/1014416_m.jpg";
 		p3.w = 950;
 		p3.h = 597;
 
 		PhotoInfo p4 = new PhotoInfo();
-		p4.url = "http://a.hiphotos.baidu.com/image/pic/item/a6efce1b9d16fdfa0fbc1ebfb68f8c5495ee7b8b.jpg";
+//		p4.url = "http://a.hiphotos.baidu.com/image/pic/item/a6efce1b9d16fdfa0fbc1ebfb68f8c5495ee7b8b.jpg";
+		p4.url = "http://i2.dpfile.com/2008-01-20/314677_m.jpg";
 		p4.w = 533;
 		p4.h = 800;
 
 		PhotoInfo p5 = new PhotoInfo();
-		p5.url = "http://b.hiphotos.baidu.com/image/pic/item/a71ea8d3fd1f4134e61e0f90211f95cad1c85e36.jpg";
+//		p5.url = "http://b.hiphotos.baidu.com/image/pic/item/a71ea8d3fd1f4134e61e0f90211f95cad1c85e36.jpg";
+		p5.url = "http://i1.dpfile.com/2011-01-22/6576762_m.jpg";
 		p5.w = 700;
 		p5.h = 467;
 
 		PhotoInfo p6 = new PhotoInfo();
-		p6.url = "http://c.hiphotos.baidu.com/image/pic/item/7dd98d1001e939011b9c86d07fec54e737d19645.jpg";
+		p6.url = "http://i2.dpfile.com/2009-04-24/1916533_m.jpg";
 		p6.w = 700;
 		p6.h = 467;
 
 		PhotoInfo p7 = new PhotoInfo();
-		p7.url = "http://pica.nipic.com/2007-10-17/20071017111345564_2.jpg";
+		p7.url = "http://i1.dpfile.com/2008-11-22/1209528_m.jpg";
 		p7.w = 1024;
 		p7.h = 640;
 
@@ -118,12 +165,12 @@ public class DatasUtil {
 		p8.h = 768;
 
 		PhotoInfo p9 = new PhotoInfo();
-		p9.url = "http://pic4.nipic.com/20091203/1295091_123813163959_2.jpg";
+		p9.url = "http://i3.dpfile.com/2009-11-04/3080111_m.jpg";
 		p9.w = 1024;
 		p9.h = 640;
 
 		PhotoInfo p10 = new PhotoInfo();
-		p10.url = "http://pic31.nipic.com/20130624/8821914_104949466000_2.jpg";
+		p10.url = "http://i2.dpfile.com/2009-04-24/1916533_m.jpg";
 		p10.w = 1024;
 		p10.h = 768;
 
@@ -139,27 +186,46 @@ public class DatasUtil {
 		PHOTOS.add(p10);
 	}
 
+
+
+
+
+	/**
+	 * 创建一个说说
+	 */
+	public static void addCircleItem(CircleItem circleItem){
+		circleDatas.add(circleItem);
+	}
+
+	public static List<CircleItem> getCircleDatas() {
+		return circleDatas;
+	}
+
+
+
 	/**
 	 * 创建所有的说说
 	 * @return
      */
 	public static List<CircleItem> createCircleDatas() {
-		List<CircleItem> circleDatas = new ArrayList<>();
+		circleDatas = new ArrayList<>();
 		for (int i = 0; i < 15; i++) {
 			CircleItem item = new CircleItem();
 			User user = getUser();
 			item.setId(String.valueOf(circleId++));
 			item.setUser(user);
 			item.setContent(getContent());
-			item.setCreateTime("12月24日");
+			item.setCreateTime(DateUtil.getDate(new Date()));
 			item.setFavorters(createFavortItemList());
 			item.setComments(createCommentItemList());
-
+            item.setRating(2);
 			int type = getRandomNum(10) % 2;//说说的类型
 			if (type == 0) {
-				item.setType("1");// 链接
-				item.setLinkImg("http://pics.sc.chinaz.com/Files/pic/icons128/2264/%E8%85%BE%E8%AE%AFQQ%E5%9B%BE%E6%A0%87%E4%B8%8B%E8%BD%BD1.png");
-				item.setLinkTitle("百度一下，你就知道");
+//				item.setType("1");// 链接
+//				item.setLinkImg("http://pics.sc.chinaz.com/Files/pic/icons128/2264/%E8%85%BE%E8%AE%AFQQ%E5%9B%BE%E6%A0%87%E4%B8%8B%E8%BD%BD1.png");
+//				item.setLinkTitle("百度一下，你就知道");
+				item.setType("2");// 图片
+				item.setPhotos(createPhotos());
 			} else if(type == 1){
 				item.setType("2");// 图片
 				item.setPhotos(createPhotos());
@@ -173,6 +239,31 @@ public class DatasUtil {
 			circleDatas.add(item);
 		}
 
+		//保存到数据库，
+		List<BmobObject> list = new ArrayList<>();
+		for (int i = 0; i < circleDatas.size() ; i++) {
+			list.add(circleDatas.get(i));
+		}
+//
+//		new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
+//
+//			@Override
+//			public void done(List<BatchResult> list, BmobException e) {
+//				if (e==null){
+//					for(int i=0;i<list.size();i++){
+//						BatchResult result = list.get(i);
+//						BmobException ex =result.getError();
+//						if(ex==null){
+//							Logger.e("第"+i+"个数据批量添加成功："+result.getCreatedAt()+","+result.getObjectId()+","+result.getUpdatedAt());
+//						}else{
+//							Logger.e("第"+i+"个数据批量添加失败："+ex.getMessage()+","+ex.getErrorCode());
+//						}
+//					}
+//				}else{
+//					Logger.e("Bmob添加异常"+e.getMessage()+","+e.getErrorCode());
+//				}
+//			}
+//		});
 		return circleDatas;
 	}
 

@@ -28,6 +28,12 @@ public class CircleModel {
 		requestServer(listener);
 	}
 
+	public void addCircle( final IDataRequestListener listener) {
+		requestServer(listener);
+	}
+
+
+
 	public void addFavort( final IDataRequestListener listener) {
 		requestServer(listener);
 	}

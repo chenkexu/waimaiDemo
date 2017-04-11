@@ -9,6 +9,7 @@ import com.cheikh.lazywaimai.model.ShoppingCart;
 import com.cheikh.lazywaimai.model.bean.Business;
 import com.cheikh.lazywaimai.model.bean.CartInfo;
 import com.cheikh.lazywaimai.model.bean.Order;
+import com.cheikh.lazywaimai.model.bean.OrderStatus;
 import com.cheikh.lazywaimai.model.bean.PaymentPlatform;
 import com.cheikh.lazywaimai.model.bean.ResponseError;
 import com.cheikh.lazywaimai.model.bean.ResultsPage;
@@ -24,6 +25,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
+import com.wxhl.core.utils.L;
 
 import java.util.List;
 
@@ -140,13 +142,19 @@ public class OrderController extends BaseController<OrderController.OrderUi, Ord
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new RequestCallback<List<Order>>() {
                         @Override
-                        public void onResponse(List<Order> orders) {
+                        public void onResponse(List<Order> allOrders) {
                             OrderUi ui = findUi(callingId);
                             if (ui instanceof OrderListUi) {
-                                boolean haveNextPage = orders != null && orders.size() == PAGE_SIZE;
-                                ((OrderListUi) ui).onFinishRequest(orders, page, haveNextPage);
-                                Logger.e("我的所有订单为："+orders.toString());
-                                Logger.e("我的订单数为：："+orders.size());
+                                boolean haveNextPage = allOrders != null && allOrders.size() == PAGE_SIZE;
+
+                                L.e("--------------------------------------");
+                                Order order = allOrders.get(0);
+                                order.setStatus(OrderStatus.STATUS_FINISHED);
+                                allOrders.add(order);
+
+                                ((OrderListUi) ui).onFinishRequest(allOrders, page, haveNextPage);
+                                Logger.e("我的所有订单为："+allOrders.toString());
+                                Logger.e("我的订单数为：："+allOrders.size());
                             }
                         }
 
@@ -158,7 +166,7 @@ public class OrderController extends BaseController<OrderController.OrderUi, Ord
                             }
                         }
                     });
-        }
+            }
     }
 
     /**
@@ -289,6 +297,7 @@ public class OrderController extends BaseController<OrderController.OrderUi, Ord
             public void refresh() {
                 if (ui instanceof OrderListUi) {
                     mPageIndex = 1;
+                    //请求第一页，一页加载十个数据
                     doFetchOrders(getId(ui), mPageIndex, PAGE_SIZE);
                 } else if (ui instanceof OrderDetailUi) {
                     doFetchOrder(getId(ui), ui.getRequestParameter());
@@ -377,9 +386,14 @@ public class OrderController extends BaseController<OrderController.OrderUi, Ord
                 }
             }
 
+
             @Override
-            public void showEvaluate() {
-                // 显示评价页面
+            public void showEvaluate(Order order) {
+                Preconditions.checkNotNull(order, "business cannot be null");
+                Display display = getDisplay();
+                if (display != null) {
+                    display.goEvaluate(order);
+                }
             }
 
             @Override
@@ -440,7 +454,7 @@ public class OrderController extends BaseController<OrderController.OrderUi, Ord
 
         void showBusiness(Business business);
 
-        void showEvaluate();
+        void showEvaluate(Order order);
 
         void payment(Order order, String platformId);
 

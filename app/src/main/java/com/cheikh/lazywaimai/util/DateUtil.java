@@ -602,7 +602,7 @@ public class DateUtil {
      * @return 日期
      */
     public static String getDate(Date date) {
-        return DateToString(date, DateStyle.YYYY_MM_DD);
+        return DateToString(date, DateStyle.YYYY_MM_DD_HH_MM);
     }
 
     /**

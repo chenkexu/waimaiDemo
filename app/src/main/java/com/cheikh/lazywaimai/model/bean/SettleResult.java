@@ -23,11 +23,6 @@ public class SettleResult {
         @SerializedName("send_time_tip")
         String sendTimeTip;
 
-
-
-
-
-
         public long getUnixTime() {
             return unixTime;
         }

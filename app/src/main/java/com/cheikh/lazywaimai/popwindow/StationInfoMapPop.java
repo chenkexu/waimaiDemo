@@ -86,6 +86,12 @@ public class StationInfoMapPop extends BasePop implements View.OnClickListener{
         llNavigation = (LinearLayout) v.findViewById(R.id.ll_navigation);
         btnSell = (Button) v.findViewById(btn_sell);
         btnNavigation = (Button) v.findViewById(btn_navigation);
+        tvRate.setListener(new ProperRatingBar.RatingListener() {
+            @Override
+            public void onRatePicked(ProperRatingBar ratingBar) {
+                ratingBar.setRating(ratingBar.getRating());
+            }
+        });
     }
 
     /**

@@ -48,6 +48,34 @@
                     android:ellipsize="end"
                     android:textColor="@color/color_aeaeae"
                     android:textSize="14sp" />
+                <com.cheikh.lazywaimai.widget.ProperRatingBar
+                    android:id="@+id/tv_seller_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:layout_gravity="top"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_alignLeft="@+id/tv_name"
+                    android:layout_alignStart="@+id/tv_name"
+                    app:prb_totalTicks="5"
+                    app:prb_defaultRating="2"
+                    app:prb_symbolicTick="✩"
+                    android:textStyle="bold"
+                    app:prb_tickNormalDrawable="@drawable/ic_star_normal"
+                    app:prb_tickSelectedDrawable="@drawable/ic_star_selected"
+                    />
+                <TextView android:id="@+id/orderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                          android:text="四川麻辣烫(少年村路)"
+                          android:layout_marginLeft="10dp"
+                          android:textSize="13dp"
+                          android:textColor="@color/primary_dark"
+                    />
             </LinearLayout>
 
             <mvp.circledemo.widgets.ExpandTextView

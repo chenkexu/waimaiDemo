@@ -25,7 +25,7 @@ public interface CircleContract {
         void update2DeleteComment(int circlePosition, String commentId);
         void updateEditTextBodyVisible(int visibility, CommentConfig commentConfig);
         void update2loadData(int loadType, List<CircleItem> datas); //声明一个方法
-
+        void update2AddCicle(CircleItem circleItem);
 }
     interface Presenter extends BasePresenter{
         //定义接口的CircleActivity调用这些方法

@@ -47,6 +47,7 @@
             android:gravity="center_vertical"
             android:textColor="@color/red"
             android:textSize="25sp"
+            android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/tv_name"
             android:layout_alignLeft="@+id/tv_name"
@@ -54,8 +55,8 @@
             app:prb_totalTicks="5"
             app:prb_defaultRating="2"
             app:prb_symbolicTick="✩"
-            app:prb_symbolicTickNormalColor="@color/secondary_text"
-            app:prb_symbolicTickSelectedColor="@color/accent_yellow"
+            app:prb_tickNormalDrawable="@drawable/ic_star_normal"
+            app:prb_tickSelectedDrawable="@drawable/ic_star_selected"
             />
 
         <ImageView

@@ -26,7 +26,7 @@ public class SplashActivity extends BasePermissionActivity {
                         Manifest.permission.READ_EXTERNAL_STORAGE
                 });
             }
-        }, 2000);
+        }, 1000);
     }
 
     @Override

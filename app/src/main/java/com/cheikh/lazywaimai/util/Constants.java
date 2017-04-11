@@ -1,6 +1,11 @@
 package com.cheikh.lazywaimai.util;
 
-public class Constants {
+import com.wxhl.core.utils.constants.CoreConstants;
+
+public class Constants implements CoreConstants {
+    public static final String CIRCLE_DATAS = "circle_datas";
+
+
 
     public class Persistence {
         public static final String USER_INFO = "app.lazywaimai.userinfo";

@@ -23,8 +23,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cheikh.lazywaimai.R;
+import com.cheikh.lazywaimai.constants.IntentConstants;
 import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -70,14 +72,21 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
     private final static int TYPE_PULLREFRESH = 1;   //刷新
     private final static int TYPE_UPLOADREFRESH = 2; //加载更多
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
+	private CircleItem circleItem;
 
 
-    @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_circle);
 		presenter = new CirclePresenter(this);
+		Intent intent = getIntent();
+		circleItem = (CircleItem) intent.getSerializableExtra(IntentConstants.CIRCLE_ITEM);
+        if(circleItem!=null){
+			Logger.e(circleItem.toString());
+		}
 		initView();
+
         //实现自动下拉刷新功能
         recyclerView.getSwipeToRefresh().post(new Runnable(){
             @Override
@@ -87,8 +96,6 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
             }
         });
 	}
-
-
 
 
 	@Override
@@ -136,8 +143,8 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
                 }, 2000);
             }
         };
-        recyclerView.setRefreshListener(refreshListener);
 
+        recyclerView.setRefreshListener(refreshListener);
 		recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
 			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -154,10 +161,10 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
 				}
 			}
 		});
-
 		circleAdapter = new CircleAdapter(this);
 		circleAdapter.setCirclePresenter(presenter);
         recyclerView.setAdapter(circleAdapter);
+
 		edittextbody = (LinearLayout) findViewById(R.id.editTextBodyLl); //评论框的整体布局
 		editText = (EditText) findViewById(R.id.circleEt);//编辑要发表的评论
 		sendIv = (ImageView) findViewById(R.id.sendIv);
@@ -180,7 +187,6 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
 				updateEditTextBodyVisible(View.GONE, null);
 			}
 		});
-
 		setViewTreeObserver();
 	}
 
@@ -190,7 +196,6 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
 	 * 初始化标题栏
 	 */
     private void initTitle() {
-
         titleBar = (TitleBar) findViewById(R.id.main_title_bar);
         titleBar.setTitle("美食评价");
         titleBar.setTitleColor(getResources().getColor(R.color.white));
@@ -279,6 +284,9 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
 	public void update2loadData(int loadType, List<CircleItem> datas) {
 		if (loadType == TYPE_PULLREFRESH){ //下拉刷新
 			recyclerView.setRefreshing(false);
+			if(circleItem!=null){
+				datas.add(0,circleItem);//添加一条评价
+			}
 			circleAdapter.setDatas(datas);
 		}else if(loadType == TYPE_UPLOADREFRESH){ //加载更多
 			circleAdapter.getDatas().addAll(datas);
@@ -289,12 +297,14 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
 			recyclerView.setupMoreListener(new OnMoreListener() {
 				@Override
 				public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
+
 					new Handler().postDelayed(new Runnable() {
 						@Override
 						public void run() {
 							presenter.loadData(TYPE_UPLOADREFRESH);
 						}
 					}, 2000);
+
 				}
 			}, 1);
 		}else{
@@ -322,6 +332,18 @@ public class CircleActivity extends YWActivity implements CircleContract.View {
 			}
 		}
 	}
+
+	/**
+	 * 增加一个动态
+	 */
+	@Override
+	public void update2AddCicle(CircleItem circleItem) {
+		List<CircleItem> circleItems = circleAdapter.getDatas();
+		circleItems.add(circleItem);
+		circleAdapter.notifyDataSetChanged();
+	}
+
+
 
 	/**
 	 * 增加一个赞

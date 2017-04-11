@@ -29,6 +29,7 @@ public interface OrderService {
                              @Field("booked_at") long bookedAt,
                              @Field("remark") String remark);
 
+    //获取所有订单
     @GET("orders?expand=business_info,cart_info")
     Observable<ResultsPage<Order>> orders(@Query("page") int page, @Query("size") int size);
 
@@ -36,6 +37,7 @@ public interface OrderService {
     @GET("orders/{id}?expand=cart_info")
     Observable<Order> detail(@Path("id") String orderId);
 
+    //在线支付
     @FormUrlEncoded
     @POST("payments")
     Observable<Object> payment(@Field("order_id") String orderId,

@@ -181,8 +181,8 @@ public class MultiImageView extends LinearLayout {
 			imageView.setScaleType(ScaleType.CENTER_CROP);
 			imageView.setLayoutParams(position % MAX_PER_ROW_COUNT == 0 ?moreParaColumnFirst : morePara);
 		}else {
-			imageView.setAdjustViewBounds(true);
-			imageView.setScaleType(ScaleType.CENTER_INSIDE);
+			imageView.setAdjustViewBounds(true);// TODO: 2017/4/11  
+			imageView.setScaleType(ScaleType.CENTER_CROP);
 			//imageView.setMaxHeight(pxOneMaxWandH);
 
             int expectW = photoInfo.w;

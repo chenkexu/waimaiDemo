@@ -36,7 +36,7 @@ public class CirclePresenter implements CircleContract.Presenter{
 	 * @param loadType
      */
 	public void loadData(int loadType){
-        List<CircleItem> datas = DatasUtil.createCircleDatas();//创造数据
+		List<CircleItem> datas = DatasUtil.createCircleDatas();//创造数据
         if(view!=null){
             view.update2loadData(loadType, datas);//更新界面（实现方法由activity实现，这是方法的调用）
         }
@@ -60,6 +60,20 @@ public class CirclePresenter implements CircleContract.Presenter{
 			}
 		});
 	}
+	/**
+	 * 增加动态
+	 */
+	public void addCircle(final CircleItem circleItem){
+		circleModel.addCircle(new IDataRequestListener() {
+			@Override
+			public void loadSuccess(Object object) {
+				if (view!=null){
+					view.update2AddCicle(circleItem);
+				}
+			}
+		});
+	}
+
 	/**
 	 * 
 	* @Title: addFavort 

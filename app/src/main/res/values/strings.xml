@@ -57,7 +57,7 @@
 
     <string name="label_error_network">网络出现错误，请稍后重试!</string>
     <string name="label_error_network_is_bad">当前网络环境较差</string>
-    
+
     <string name="label_link_forget_password">忘记密码？</string>
     <string name="label_link_register">去注册</string>
 

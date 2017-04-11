@@ -182,19 +182,6 @@ public class BusinessController extends BaseController<BusinessController.Busine
         }
 
         new BmobBatch().insertBatch(sellers).doBatch(new QueryListListener<BatchResult>() {
-
-            @Override
-            public void onStart() {
-                super.onStart();
-                Logger.e("------onStart-----------------");
-            }
-
-            @Override
-            public void onFinish() {
-                super.onFinish();
-                Logger.e("------onFinish-----------------");
-            }
-
             @Override
             public void done(List<BatchResult> list, BmobException e) {
                 if (e==null){
