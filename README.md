@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ![License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg?style=flat)
 
 ## 相关项目
@@ -65,3 +66,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </pre>
+=======
+# waimaiDemo第一次提交到github上的我写的项目
+
+
+>>>>>>> origin/master
