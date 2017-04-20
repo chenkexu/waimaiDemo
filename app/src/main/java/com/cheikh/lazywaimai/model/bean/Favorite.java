@@ -16,6 +16,12 @@ public class Favorite {
     @SerializedName("business_info")
     Business business;
 
+
+
+
+
+
+
     public String getId() {
         return id;
     }

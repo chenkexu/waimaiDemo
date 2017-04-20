@@ -28,6 +28,10 @@ public class Address implements Parcelable {
     @SerializedName("gender")
     Gender gender;
 
+
+
+
+
     public String getId() {
         return id;
     }

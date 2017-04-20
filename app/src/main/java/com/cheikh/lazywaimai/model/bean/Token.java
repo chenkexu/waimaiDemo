@@ -9,22 +9,26 @@ import com.google.gson.annotations.SerializedName;
 public class Token {
 
     @SerializedName("access_token")
-    String accessToken;
+    String accessToken; //访问的令牌
 
     @SerializedName("user_id")
-    String userId;
+    String userId; //令牌类型
 
     @SerializedName("expires_in")
-    int expiresin;
+    int expiresin; //过期时间
 
     @SerializedName("token_type")
-    String tokenType;
+    String tokenType; //表示更新令牌，用来获取下一次的访问令牌，可选项。
 
     @SerializedName("scope")
-    String scope;
+    String scope; //权限范围
 
     @SerializedName("refresh_token")
-    String refreshToken;
+    String refreshToken; //；access token过期后刷新access token的一个标记.
+
+
+
+
 
     public String getAccessToken() {
         return accessToken;

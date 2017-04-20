@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">懒人外卖</string>
+    <string name="app_name">易订餐</string>
 
     <!-- Activity或者Fragment的标题 -->
     <string name="title_shop">客官,请您点餐</string>
@@ -26,9 +26,9 @@
     <string name="title_create_address">新增地址</string>
     <string name="title_change_address">修改地址</string>
 
-    <string name="tab_home">主页</string>
+    <string name="tab_home">点餐</string>
     <string name="tab_orders">订单</string>
-    <string name="tab_me">我的</string>
+    <string name="tab_me">个人</string>
 
     <!-- 菜单项的标题 -->
     <string name="action_search">搜索</string>
